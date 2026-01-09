@@ -1,0 +1,24 @@
+<div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+  <h2 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+    🚀 Daily Email Intelligence
+  </h2>
+  
+  <p>Good afternoon. Here is your automated summary of high-priority messages.</p>
+  
+  <div style="background-color: #f9f9f9; padding: 15px; border-left: 5px solid #3498db; margin-bottom: 20px;">
+    <strong>Quick Stats:</strong><br>
+    ✅ Processed: {{ $json.total_count }} emails<br>
+    🔥 High Priority: {{ $json.high_priority_count }} emails
+  </div>
+
+  <h3>⚠️ Top Actions Required:</h3>
+  <ul style="padding-left: 20px;">
+    {{ $json.email_list_html }} 
+  </ul>
+
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+  <p style="font-size: 12px; color: #999;">
+    Generated automatically by n8n Email Triage System.<br>
+    <em>Privacy Note: Full email bodies are not stored, only AI summaries.</em>
+  </p>
+</div>
