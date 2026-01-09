@@ -1,26 +1,18 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/email-triage.schema.json",
-  "title": "EmailTriageResult",
+  "$id": "https://example.com/email-row.schema.json",
+  "title": "EmailRowForTable",
   "type": "object",
   "additionalProperties": false,
   "required": [
+    "category",
     "importance",
-    "topic",
-    "subtopics",
-    "confidence",
-    "reason",
-    "summary",
-    "suggested_label",
-    "needs_follow_up"
+    "ai_summary",
+    "action_required",
+    "status"
   ],
   "properties": {
-    "importance": {
-      "type": "string",
-      "enum": ["important", "not_important"],
-      "description": "Whether the email should be treated as important."
-    },
-    "topic": {
+    "category": {
       "type": "string",
       "enum": [
         "work",
@@ -33,48 +25,28 @@
         "security",
         "other"
       ],
-      "description": "Primary topic classification."
+      "description": "Primary category for the email."
     },
-    "subtopics": {
-      "type": "array",
-      "description": "Optional secondary tags. Keep short.",
-      "items": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 30
-      },
-      "minItems": 0,
-      "maxItems": 3,
-      "uniqueItems": true
+    "importance": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Importance score from 1 (low) to 5 (critical)."
     },
-    "confidence": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 1,
-      "description": "Model confidence score (0.0–1.0)."
-    },
-    "reason": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 240,
-      "description": "Short explanation (max ~2 sentences)."
-    },
-    "summary": {
+    "ai_summary": {
       "type": "string",
       "minLength": 1,
       "maxLength": 260,
-      "description": "Short user-facing summary (1–2 sentences). Avoid sensitive data."
+      "description": "1–2 sentences summary. Avoid sensitive data and full URLs/codes."
     },
-    "suggested_label": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 60,
-      "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-/]{0,59}$",
-      "description": "Label/folder to apply in the mailbox system (n8n). Example: IMPORTANT/FINANCE."
-    },
-    "needs_follow_up": {
+    "action_required": {
       "type": "boolean",
-      "description": "True if user action is likely needed (reply, payment, deadline)."
+      "description": "True if user likely must do something (reply/pay/confirm/submit)."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["new", "waiting_user", "waiting_other", "done", "needs_review"],
+      "description": "Workflow/task status for the table."
     }
   }
 }
