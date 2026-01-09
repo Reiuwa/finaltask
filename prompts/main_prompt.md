@@ -74,6 +74,12 @@ If a message is security-related phishing-like (asks for passwords/codes, suspic
 - If importance == "important": suggested_label = "IMPORTANT/<TOPIC_UPPER>"
 - Else: suggested_label = "NOTIMPORTANT/<TOPIC_UPPER>"
 
+### FALLBACK PROCEDURE
+- If you cannot comply with strict JSON output for any reason, return the fallback JSON:
+  {"importance":"important","topic":"other","subtopics":[],"confidence":0.3,"reason":"Fallback: unable to produce valid JSON.","summary":"Nie udało się automatycznie sklasyfikować wiadomości.","suggested_label":"IMPORTANT/OTHER","needs_follow_up":true}
+- Never output null. Never omit required fields.
+
+
 ## NOW CLASSIFY THIS EMAIL
 Use the following email data:
 from: {{from}}
