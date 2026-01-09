@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/email-triage.schema.json",
+  "title": "EmailTriageResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "importance",
+    "topic",
+    "subtopics",
+    "confidence",
+    "reason",
+    "summary",
+    "suggested_label",
+    "needs_follow_up"
+  ],
+  "properties": {
+    "importance": {
+      "type": "string",
+      "enum": ["important", "not_important"],
+      "description": "Whether the email should be treated as important."
+    },
+    "topic": {
+      "type": "string",
+      "enum": [
+        "work",
+        "university",
+        "finance",
+        "admin",
+        "shopping",
+        "newsletters",
+        "social",
+        "security",
+        "other"
+      ],
+      "description": "Primary topic classification."
+    },
+    "subtopics": {
+      "type": "array",
+      "description": "Optional secondary tags. Keep short.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 30
+      },
+      "minItems": 0,
+      "maxItems": 3,
+      "uniqueItems": true
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Model confidence score (0.0–1.0)."
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "description": "Short explanation (max ~2 sentences)."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 260,
+      "description": "Short user-facing summary (1–2 sentences). Avoid sensitive data."
+    },
+    "suggested_label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-/]{0,59}$",
+      "description": "Label/folder to apply in the mailbox system (n8n). Example: IMPORTANT/FINANCE."
+    },
+    "needs_follow_up": {
+      "type": "boolean",
+      "description": "True if user action is likely needed (reply, payment, deadline)."
+    }
+  }
+}
