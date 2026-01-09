@@ -1,40 +1,71 @@
-# Integration notes (n8n + AI)
+# Integration notes (n8n + AI) — Email triage into a final table
 
-## What n8n should pass into the prompt
-Provide these variables (strings):
-- from
-- subject
-- date (optional)
-- body (plain text; if HTML, strip tags; can be snippet)
+## Goal
+n8n fetches an email from Gmail, sends key fields to AI, AI returns a strict JSON (5 fields),
+and n8n writes a full row into the final table.
 
-If body is long, truncate to ~4000–6000 chars.
+## Final table columns (output)
+- date (from Gmail)
+- from (from Gmail)
+- subject (from Gmail)
+- category (from AI)
+- importance (1–5) (from AI)
+- Ai summary (from AI)
+- action requiered (from AI)  ← keep this spelling if your sheet uses it
+- status (from AI)
+
+## What n8n sends to AI
+Inject into the prompt:
+- from: sender (e.g., "Name <email@...>")
+- subject: subject line
+- date: sent/received timestamp (ISO if possible)
+- body: plain text body OR snippet (may be incomplete)
+
+### Preprocessing (important)
+- Strip HTML → plain text
+- Truncate body to ~6000 characters (signatures/quoted threads can be huge)
+- If body is empty → use snippet or subject
 
 ## Expected AI response
-AI must return ONLY a JSON object that matches `prompts/schema.json`.
+AI must return ONLY a JSON object matching `prompts/schema.json`:
+- category: enum
+- importance: integer 1..5
+- ai_summary: short, no full URLs/codes/IDs
+- action_required: boolean
+- status: enum
 
-## Parsing
+## Parsing + validation in n8n
 After the AI node:
-1) Parse JSON (or use a node that directly returns JSON).
+1) Parse JSON
 2) Validate:
-   - importance in ["important","not_important"]
-   - topic in allowed list
-   - suggested_label matches IMPORTANT/<TOPIC_UPPER> or NOTIMPORTANT/<TOPIC_UPPER>
+   - category is in the allowed list
+   - importance is within [1..5]
+   - action_required is boolean
+   - status is one of the allowed values
+3) If parsing/validation fails → fallback below (do NOT stop the workflow)
 
 ## Fallback / safety (must-have)
-If JSON parsing fails OR any required field missing:
-- Set default:
-  - importance: "important"
-  - topic: "other"
-  - subtopics: []
-  - confidence: 0.3
-  - reason: "Fallback: invalid AI output."
-  - summary: "Nie udało się automatycznie sklasyfikować wiadomości."
-  - suggested_label: "IMPORTANT/OTHER"
-  - needs_follow_up: true
-- Log the raw AI output for debugging (but do not store full email body if you want privacy).
+If JSON parsing fails or required fields are missing, set:
+- category: "other"
+- importance: 3
+- ai_summary: "Auto-classification failed for this email."
+- action_required: true
+- status: "needs_review"
 
-## Recommended routing
-- Apply Gmail label = suggested_label
-- Optionally star important emails
-- Save one row to report storage (Sheets/DB):
-  date, from, subject, importance, topic, confidence, summary, suggested_label
+Also:
+- Log the raw AI output for debugging
+- Do NOT store full email bodies in logs (privacy)
+
+## Mapping into the final table row
+Write one row as:
+- date/from/subject → from Gmail trigger
+- category/importance/ai_summary/action_required/status → from AI
+
+Notes:
+- Column “Ai summary” ← `ai_summary`
+- Column “action requiered” ← `action_required` (sheet may contain a typo)
+
+## Recommended status rules (aligned with the prompt)
+- action_required = true → usually "waiting_user"
+- importance <= 2 and action_required = false → "done"
+- suspicious/phishing-like security messages → "needs_review" (highest priority)
