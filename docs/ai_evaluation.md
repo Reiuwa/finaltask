@@ -1,71 +1,55 @@
-# Integration notes (n8n + AI) — Email triage into a final table
+# AI evaluation (plan + reporting)
 
-## Goal
-n8n fetches an email from Gmail, sends key fields to AI, AI returns a strict JSON (5 fields),
-and n8n writes a full row into the final table.
+## What AI automates
+AI replaces manual work of:
+- assigning a topic/category,
+- scoring importance (1–5),
+- writing a short summary,
+- detecting whether user action is required,
+- setting an initial status for tracking.
 
-## Final table columns (output)
-- date (from Gmail)
-- from (from Gmail)
-- subject (from Gmail)
-- category (from AI)
-- importance (1–5) (from AI)
-- Ai summary (from AI)
-- action requiered (from AI)  ← keep this spelling if your sheet uses it
-- status (from AI)
+## AI artifacts in this repository
+- prompts/main_prompt.md
+- prompts/schema.json
+- sample_data/test_emails.json (anonymized examples)
+- sample_data/expected_rows.json (expected: category/importance/action_required/status)
 
-## What n8n sends to AI
-Inject into the prompt:
-- from: sender (e.g., "Name <email@...>")
-- subject: subject line
-- date: sent/received timestamp (ISO if possible)
-- body: plain text body OR snippet (may be incomplete)
+## Quality metrics (for grading + presentation)
+1) JSON validity rate:
+   - % of emails where AI output is valid JSON matching the schema
+   - target: 95–100%
+2) Category accuracy:
+   - category matches expected_rows
+3) Importance error:
+   - average absolute error |predicted - expected| for importance
+4) Action_required accuracy:
+   - boolean match vs expected_rows
+5) Status consistency:
+   - status follows the rules (e.g., action_required=true → waiting_user, etc.)
 
-### Preprocessing (important)
-- Strip HTML → plain text
-- Truncate body to ~6000 characters (signatures/quoted threads can be huge)
-- If body is empty → use snippet or subject
+## Test plan
+### Offline test (without Gmail)
+- Use sample_data/test_emails.json as inputs
+- Compare AI outputs to sample_data/expected_rows.json
+- Record results (manual table or markdown is enough)
 
-## Expected AI response
-AI must return ONLY a JSON object matching `prompts/schema.json`:
-- category: enum
-- importance: integer 1..5
-- ai_summary: short, no full URLs/codes/IDs
-- action_required: boolean
-- status: enum
+### Live test (Gmail + n8n)
+- Run on 20–50 real emails (diverse types)
+- Verify:
+  - JSON parsing never breaks the workflow
+  - category/importance look reasonable
+  - action_required is not over-triggered on newsletters
+- Collect 5 examples:
+  - 3 correct classifications
+  - 2 incorrect/edge cases + how to fix the prompt
 
-## Parsing + validation in n8n
-After the AI node:
-1) Parse JSON
-2) Validate:
-   - category is in the allowed list
-   - importance is within [1..5]
-   - action_required is boolean
-   - status is one of the allowed values
-3) If parsing/validation fails → fallback below (do NOT stop the workflow)
+## Common issues and prompt fixes
+- Extra text outside JSON → strengthen “Return ONLY JSON” + include fallback JSON
+- category outside enum → enforce allowed list and forbid new categories
+- summary copies URLs/OTP codes → explicitly prohibit copying links/codes
+- importance too high for newsletters → make the scale stricter (newsletters usually 1)
 
-## Fallback / safety (must-have)
-If JSON parsing fails or required fields are missing, set:
-- category: "other"
-- importance: 3
-- ai_summary: "Auto-classification failed for this email."
-- action_required: true
-- status: "needs_review"
-
-Also:
-- Log the raw AI output for debugging
-- Do NOT store full email bodies in logs (privacy)
-
-## Mapping into the final table row
-Write one row as:
-- date/from/subject → from Gmail trigger
-- category/importance/ai_summary/action_required/status → from AI
-
-Notes:
-- Column “Ai summary” ← `ai_summary`
-- Column “action requiered” ← `action_required` (sheet may contain a typo)
-
-## Recommended status rules (aligned with the prompt)
-- action_required = true → usually "waiting_user"
-- importance <= 2 and action_required = false → "done"
-- suspicious/phishing-like security messages → "needs_review" (highest priority)
+## Privacy policy (good for grading)
+- Store only metadata + short summary in the table
+- Avoid storing full email bodies in logs
+- sample_data is anonymized
