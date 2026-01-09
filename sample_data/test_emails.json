@@ -1,0 +1,177 @@
+[
+  {
+    "id": "t01",
+    "from": "Uniwersytet XYZ <dziekanat@uni.example>",
+    "subject": "Laboratorium: termin oddania projektu (12.01)",
+    "date": "2026-01-08T10:15:00Z",
+    "body": "Przypominamy, że termin oddania projektu końcowego mija 12.01. Prosimy o przesłanie linku do repozytorium GitHub oraz krótkiego opisu workflow w pliku README."
+  },
+  {
+    "id": "t02",
+    "from": "Sklep Online <orders@shop.example>",
+    "subject": "Twoje zamówienie zostało wysłane",
+    "date": "2026-01-08T12:00:00Z",
+    "body": "Dziękujemy za zakup. Twoja paczka jest w drodze. Planowana dostawa: 10.01. Status przesyłki zostanie zaktualizowany automatycznie."
+  },
+  {
+    "id": "t03",
+    "from": "Tech Weekly <newsletter@techweekly.example>",
+    "subject": "Tech Weekly #182 — nowości tygodnia",
+    "date": "2026-01-08T06:30:00Z",
+    "body": "Cześć! W tym tygodniu: aktualizacje narzędzi automatyzacji, skróty z branży, polecane artykuły. Jeśli nie chcesz otrzymywać wiadomości, możesz wypisać się w ustawieniach."
+  },
+  {
+    "id": "t04",
+    "from": "Faktury CloudHost <billing@cloudhost.example>",
+    "subject": "Faktura VAT 01/2026 — termin płatności 15.01",
+    "date": "2026-01-07T17:05:00Z",
+    "body": "Wystawiliśmy fakturę za usługę hostingową za styczeń 2026. Termin płatności: 15.01. Prosimy o uregulowanie należności zgodnie z warunkami umowy."
+  },
+  {
+    "id": "t05",
+    "from": "SecureMail <security@securemail.example>",
+    "subject": "Alert bezpieczeństwa: nowe logowanie z nieznanego urządzenia",
+    "date": "2026-01-08T01:20:00Z",
+    "body": "Wykryliśmy logowanie z nowego urządzenia. Jeśli to nie Ty, zalecamy natychmiastową zmianę hasła i sprawdzenie aktywności konta."
+  },
+  {
+    "id": "t06",
+    "from": "Kierownik Projektu <pm@company.example>",
+    "subject": "Prośba o potwierdzenie: spotkanie 09.01 14:00",
+    "date": "2026-01-08T09:10:00Z",
+    "body": "Czy możesz potwierdzić obecność na spotkaniu projektowym jutro o 14:00? Wyślę agendę po potwierdzeniu."
+  },
+  {
+    "id": "t07",
+    "from": "Znajomy <friend@personal.example>",
+    "subject": "Hej, jak tam? 🙂",
+    "date": "2026-01-07T20:45:00Z",
+    "body": "Dawno się nie odzywaliśmy! Co u Ciebie? Jak idzie semestr i projekty?"
+  },
+  {
+    "id": "t08",
+    "from": "Urząd Miasta <kontakt@urzad.example>",
+    "subject": "Wymagane uzupełnienie dokumentów — termin 14 dni",
+    "date": "2026-01-06T11:00:00Z",
+    "body": "W związku z prowadzoną sprawą prosimy o uzupełnienie brakujących dokumentów w terminie 14 dni od daty otrzymania niniejszego pisma. Brak uzupełnienia może skutkować pozostawieniem wniosku bez rozpoznania."
+  },
+  {
+    "id": "t09",
+    "from": "Bank ABC <noreply@bank.example>",
+    "subject": "Potwierdzenie przelewu",
+    "date": "2026-01-08T08:02:00Z",
+    "body": "Potwierdzamy wykonanie przelewu. Jeśli nie rozpoznajesz tej operacji, skontaktuj się z infolinią banku."
+  },
+  {
+    "id": "t10",
+    "from": "Promo Store <deals@promostore.example>",
+    "subject": "🔥 Weekendowa wyprzedaż — -30% na wszystko",
+    "date": "2026-01-08T07:10:00Z",
+    "body": "Tylko teraz! Skorzystaj z rabatu -30% na cały asortyment. Oferta ograniczona czasowo. Sprawdź nasze nowości i bestsellery."
+  },
+  {
+    "id": "t11",
+    "from": "Sklep Online <support@shop.example>",
+    "subject": "Wymagane działanie: potwierdź adres dostawy",
+    "date": "2026-01-08T13:25:00Z",
+    "body": "Nie możemy wysłać przesyłki bez potwierdzenia adresu dostawy. Prosimy o odpowiedź na tę wiadomość z poprawnym adresem lub aktualizację w panelu klienta."
+  },
+  {
+    "id": "t12",
+    "from": "Prowadzący <lecturer@uni.example>",
+    "subject": "Materiały do laboratorium + informacje organizacyjne",
+    "date": "2026-01-07T15:30:00Z",
+    "body": "W załączniku przesyłam materiały do laboratorium. Proszę zapoznać się przed zajęciami. Bez konieczności odpowiadania, chyba że są pytania."
+  },
+  {
+    "id": "t13",
+    "from": "System Powiadomień <notify@service.example>",
+    "subject": "Aktualizacja regulaminu usługi",
+    "date": "2026-01-05T09:00:00Z",
+    "body": "Zaktualizowaliśmy regulamin. Zmiany obowiązują od przyszłego miesiąca. Wiadomość ma charakter informacyjny."
+  },
+  {
+    "id": "t14",
+    "from": "Account Team <no-reply@accounts.example>",
+    "subject": "Reset hasła — jeśli to nie Ty, zignoruj",
+    "date": "2026-01-08T02:40:00Z",
+    "body": "Otrzymaliśmy prośbę o reset hasła do Twojego konta. Jeśli to nie Ty, zabezpiecz konto i sprawdź ostatnią aktywność."
+  },
+  {
+    "id": "t15",
+    "from": "HR <hr@company.example>",
+    "subject": "Informacja: zmiana polityki pracy zdalnej od 01.02",
+    "date": "2026-01-07T10:00:00Z",
+    "body": "Od 01.02 wprowadzamy aktualizację zasad pracy zdalnej. Prosimy o zapoznanie się z dokumentem. Nie jest wymagana odpowiedź."
+  },
+  {
+    "id": "t16",
+    "from": "Sklep Online <noreply@shop.example>",
+    "subject": "Polecane produkty na podstawie Twoich zakupów",
+    "date": "2026-01-06T18:10:00Z",
+    "body": "Sprawdź rekomendacje produktów dopasowane do Twoich preferencji. Promocje i nowości dostępne w sklepie."
+  },
+  {
+    "id": "t17",
+    "from": "Operator Internetu <noreply@isp.example>",
+    "subject": "Potwierdzenie zmiany pakietu usług",
+    "date": "2026-01-08T09:45:00Z",
+    "body": "Potwierdzamy zmianę pakietu usług na nowy plan. Zmiana wejdzie w życie od następnego okresu rozliczeniowego."
+  },
+  {
+    "id": "t18",
+    "from": "Tax Service <billing@tax.example>",
+    "subject": "Wezwanie do dopłaty — termin 7 dni",
+    "date": "2026-01-08T07:55:00Z",
+    "body": "Na podstawie rozliczenia powstała niedopłata. Prosimy o uregulowanie kwoty w terminie 7 dni od otrzymania wiadomości."
+  },
+  {
+    "id": "t19",
+    "from": "Grupa znajomych <group@personal.example>",
+    "subject": "Plan na weekend?",
+    "date": "2026-01-08T16:20:00Z",
+    "body": "Macie ochotę wyskoczyć gdzieś w sobotę? Dajcie znać, kto może."
+  },
+  {
+    "id": "t20",
+    "from": "Uniwersytet XYZ <noreply@uni.example>",
+    "subject": "Brakujący wpis w systemie — wymagane potwierdzenie do 11.01",
+    "date": "2026-01-08T10:40:00Z",
+    "body": "W systemie brakuje potwierdzenia Twojego udziału w zajęciach. Prosimy o weryfikację i potwierdzenie do 11.01."
+  },
+  {
+    "id": "t21",
+    "from": "Product Updates <updates@tool.example>",
+    "subject": "Nowe funkcje w tym miesiącu",
+    "date": "2026-01-04T08:00:00Z",
+    "body": "Wprowadziliśmy nowe funkcje i usprawnienia. Zobacz listę zmian i wskazówki jak z nich korzystać."
+  },
+  {
+    "id": "t22",
+    "from": "Zespół <team@company.example>",
+    "subject": "Pilne: poprawki do prezentacji na dziś",
+    "date": "2026-01-08T11:50:00Z",
+    "body": "Potrzebujemy Twoich poprawek do slajdów jeszcze dziś. Daj znać, kiedy możesz je wgrać do repo."
+  },
+  {
+    "id": "t23",
+    "from": "Kurier <tracking@courier.example>",
+    "subject": "Dostawa zaplanowana na 09.01",
+    "date": "2026-01-08T14:10:00Z",
+    "body": "Twoja przesyłka została przyjęta do doręczenia. Planowana dostawa: 09.01. W razie potrzeby możesz zmienić termin w panelu."
+  },
+  {
+    "id": "t24",
+    "from": "Streaming <billing@streaming.example>",
+    "subject": "Potwierdzenie odnowienia subskrypcji",
+    "date": "2026-01-08T05:25:00Z",
+    "body": "Twoja subskrypcja została odnowiona. Opłata została pobrana. Wiadomość ma charakter potwierdzenia."
+  },
+  {
+    "id": "t25",
+    "from": "Nieznany nadawca <random@unknown.example>",
+    "subject": "Zaproszenie do wypełnienia ankiety",
+    "date": "2026-01-03T12:00:00Z",
+    "body": "Zapraszamy do wypełnienia krótkiej ankiety dotyczącej Twoich doświadczeń. Zajmie to 2 minuty. Dziękujemy!"
+  }
+]
