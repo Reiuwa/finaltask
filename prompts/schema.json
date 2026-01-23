@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/email-row.schema.json",
+  "title": "EmailRowForTable",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "category",
+    "importance",
+    "ai_summary",
+    "action_required",
+    "status"
+  ],
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": [
+        "work",
+        "university",
+        "finance",
+        "admin",
+        "shopping",
+        "newsletters",
+        "social",
+        "security",
+        "other"
+      ],
+      "description": "Primary category for the email."
+    },
+    "importance": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Importance score from 1 (low) to 5 (critical)."
+    },
+    "ai_summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 260,
+      "description": "1–2 sentences summary. Avoid sensitive data and full URLs/codes."
+    },
+    "action_required": {
+      "type": "boolean",
+      "description": "True if user likely must do something (reply/pay/confirm/submit)."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["new", "waiting_user", "waiting_other", "done", "needs_review"],
+      "description": "Workflow/task status for the table."
+    }
+  }
+}
