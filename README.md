@@ -9,3 +9,5 @@ design a system that automates a repetitive information task and produces a valu
 1. You turn the system on by clicking Execute button.
 2. System will see any new/unlabeled emails and sort them.
 
+Some issues created and closed to make our group work smooth and understandable 
+<img width="852" height="204" alt="image" src="https://github.com/user-attachments/assets/5c14b7ba-5d0b-48dd-8765-8a86fd6476fc" />
